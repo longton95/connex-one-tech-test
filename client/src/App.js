@@ -1,24 +1,37 @@
 import React from "react";
-import logo from "./logo.svg";
+import LeftPanel from "./panels/LeftPanel"
+import RightPanel from "./panels/RightPanel"
+
+
 import "./App.css";
 
-function App() {
-  const [data, setData] = React.useState(null);
 
-  React.useEffect(() => {
-    fetch("/api/testmsg")
-      .then((res) => res.json())
-      .then((data) => setData(data.message));
-  }, []);
+function App() {
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>{!data ? "Loading..." : data}</p>
-      </header>
+
+    <div className='splitScreen'>
+      <div className="split left">
+        <div className="centered">
+          <LeftPanel/>
+        </div>
+      </div>
+
+      <div className="split right">
+        <div className="centered">
+          <RightPanel/>
+        </div>
+      </div>
     </div>
   );
 }
 
 export default App;
+
+
+    // <div className="App">
+    //   <header className="App-header">
+    //     <img src={logo} className="App-logo" alt="logo" />
+    //     <p>{!data ? "Loading..." : data}</p>
+    //   </header>
+    // </div>
