@@ -4,7 +4,7 @@
   position: fixed;
   z-index: 1;
   top: 0;
-  overflow-x: hidden;
+  overflow-x: scroll;
   padding-top: 20px;
 }
 
@@ -20,6 +20,7 @@
 
 .centered {
   text-align: center;
+  padding: 25px;
 }
 
 .scroll-view{
