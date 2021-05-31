@@ -1,15 +1,24 @@
-var express = require('express');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const express = require('express');
+const promMid = require('express-prometheus-middleware');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var indexRouter = require('./routes/index');
+const indexRouter = require('./routes/index');
 
-var app = express();
+const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(promMid({
+	metricsPath: '/metrics',
+	collectDefaultMetrics: true,
+	requestDurationBuckets: [0.1, 0.5, 1, 1.5],
+	requestLengthBuckets: [512, 1024, 5120, 10240, 51200, 102400],
+	responseLengthBuckets: [512, 1024, 5120, 10240, 51200, 102400],
+}));
 
 app.use('/api', indexRouter);
 
